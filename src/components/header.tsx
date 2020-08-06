@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export const Header: React.FC = () => {
     return (
@@ -10,6 +10,9 @@ export const Header: React.FC = () => {
                 </li>
                 <li>
                     <Link to="/setting">Settings</Link>
+                </li>
+                <li>
+                    <Link to="/question">Question</Link>
                 </li>
             </ul>
         </nav>
