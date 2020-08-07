@@ -7,15 +7,17 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import { Header } from '../components/header';
+import { Layout } from '../components/Layout';
 
 const useStyles = makeStyles({
   tableContainer: {
     paddding: '12px',
   },
   table: {
-    minWidth: 650,
     padding: '12px',
   },
 });
@@ -36,7 +38,8 @@ export const Home: React.FC = () => {
   return (
     <>
       <Header />
-      <div>
+      <Layout>
+        <AddCircleIcon fontSize="large" />
         <TableContainer component={Paper} className={classes.tableContainer}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
@@ -44,6 +47,7 @@ export const Home: React.FC = () => {
                 <TableCell>日付</TableCell>
                 <TableCell>調整取得時間</TableCell>
                 <TableCell>失効日</TableCell>
+                <TableCell>使用/削除</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -54,12 +58,15 @@ export const Home: React.FC = () => {
                   </TableCell>
                   <TableCell>{row.overTime}</TableCell>
                   <TableCell>{row.limit}</TableCell>
+                  <TableCell>
+                    <DeleteIcon />
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
+      </Layout>
     </>
   );
 };
