@@ -9,6 +9,7 @@ import {
   TableRow,
   Paper,
   Grid,
+  Button,
   Typography,
 } from '@material-ui/core';
 
@@ -21,8 +22,12 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     addButton: {
       padding: '24px',
-      color: theme.palette.secondary.main,
-      '& p': {},
+      '& button': {
+        color: theme.palette.secondary.main,
+        '& p': {
+          fontWeight: 'bold',
+        },
+      },
     },
     tableContainer: {
       paddding: '12px',
@@ -49,9 +54,16 @@ export const Home: React.FC = () => {
   return (
     <>
       <Layout>
-        <Grid container alignItems="center" className={classes.addButton}>
-          <AddCircleIcon fontSize="large" />
-          <Typography>追加する</Typography>
+        <Grid
+          container
+          alignItems="center"
+          justify="flex-end"
+          className={classes.addButton}
+        >
+          <Button>
+            <AddCircleIcon fontSize="large" />
+            <Typography>追加する</Typography>
+          </Button>
         </Grid>
         <TableContainer component={Paper} className={classes.tableContainer}>
           <Table className={classes.table} aria-label="simple table">
