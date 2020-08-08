@@ -1,4 +1,6 @@
 import React from 'react';
+import dayjs from 'dayjs';
+
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import {
   Table,
@@ -12,7 +14,6 @@ import {
   Button,
   Typography,
 } from '@material-ui/core';
-
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
@@ -40,13 +41,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 // mockデータを作成する関数
 
-function createData(id: number, day: string, overTime: number, limit: string) {
-  return { id, day, overTime, limit };
+function createData(id: number, day: string, overTime: string) {
+  return { id, day, overTime };
 }
 
 const rows = [
-  createData(1, '2020-07-21', 1, '2020-11-21'),
-  createData(2, '2020-08-15', 30, '2020-12-15'),
+  createData(1, '2020-07-21', '01:00'),
+  createData(2, '2020-08-15', '00:30'),
 ];
 
 export const Home: React.FC = () => {
@@ -72,17 +73,19 @@ export const Home: React.FC = () => {
                 <TableCell>日付</TableCell>
                 <TableCell>調整取得時間</TableCell>
                 <TableCell>失効日</TableCell>
-                <TableCell>使用/削除</TableCell>
+                <TableCell>使用/編集</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell component="th" scope="row">
-                    {row.day}
+                    {dayjs(row.day).format('YYYY年MM月DD日')}
                   </TableCell>
                   <TableCell>{row.overTime}</TableCell>
-                  <TableCell>{row.limit}</TableCell>
+                  <TableCell>
+                    {dayjs(row.day).add(16, 'week').format('YYYY年MM月DD日')}
+                  </TableCell>
                   <TableCell>
                     <DeleteIcon />
                   </TableCell>
