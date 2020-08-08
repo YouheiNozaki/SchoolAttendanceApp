@@ -1,12 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-import { Header } from '../components/header'
+import { Layout } from '../components/layout';
 
 export const Question: React.FC = () => {
-    return (
-        <>
-            <Header />
-            <div>Question</div>
-        </>
-    )
-}
+  return (
+    <Layout>
+      <div>Question</div>
+    </Layout>
+  );
+};
