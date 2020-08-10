@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { Header } from '../header';
+import { Header } from '../templates/header';
 const useStyles = makeStyles({
   Container: { padding: '24px' },
 });

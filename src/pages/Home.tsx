@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ja';
 
@@ -17,8 +17,10 @@ import {
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import CreateIcon from '@material-ui/icons/Create';
 
 import { Layout } from '../components/layout';
+import { FormDialog } from '../components/molecules/FormDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,11 +43,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 // mockデータを作成する関数
-
 function createData(id: number, day: string, overTime: string) {
   return { id, day, overTime };
 }
-
+// mockデータ
 const rows = [
   createData(1, '2020-07-21', '01:00'),
   createData(2, '2020-08-15', '00:30'),
@@ -53,6 +54,16 @@ const rows = [
 
 export const Home: React.FC = () => {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <Layout>
@@ -62,10 +73,15 @@ export const Home: React.FC = () => {
           justify="flex-end"
           className={classes.addButton}
         >
-          <Button>
+          <Button onClick={handleOpen}>
             <AddCircleIcon fontSize="large" />
             <Typography>追加する</Typography>
           </Button>
+          <FormDialog
+            title={'作成'}
+            isOpen={open}
+            doClose={() => handleClose()}
+          />
         </Grid>
         <TableContainer component={Paper} className={classes.tableContainer}>
           <Table className={classes.table} aria-label="simple table">
@@ -88,7 +104,12 @@ export const Home: React.FC = () => {
                     {dayjs(row.day).add(16, 'week').format('YYYY年MM月DD日')}
                   </TableCell>
                   <TableCell>
-                    <DeleteIcon />
+                    <Button>
+                      <DeleteIcon />
+                    </Button>
+                    <Button>
+                      <CreateIcon />
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
