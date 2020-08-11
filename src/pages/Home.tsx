@@ -55,13 +55,19 @@ const rows = [
 export const Home: React.FC = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [Edit, setEdit] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
+  };
+  const EditOpen = () => {
+    setEdit(true);
+  };
+  const EditClose = () => {
+    setEdit(false);
   };
 
   return (
@@ -107,7 +113,7 @@ export const Home: React.FC = () => {
                     <Button>
                       <DeleteIcon />
                     </Button>
-                    <Button>
+                    <Button onClick={EditOpen}>
                       <CreateIcon />
                     </Button>
                   </TableCell>
@@ -116,6 +122,7 @@ export const Home: React.FC = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        <FormDialog title="編集" isOpen={Edit} doClose={() => EditClose()} />
       </Layout>
     </>
   );
