@@ -1,22 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import {
   Button,
-  TextField,
   Dialog,
   DialogContent,
   DialogActions,
   DialogTitle,
-  DialogContentText,
+  TextField,
+  MenuItem,
+  Grid,
 } from '@material-ui/core';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import jaLocale from 'date-fns/locale/ja';
+import DateFnsUtils from '@date-io/date-fns';
+
+const Times = ['00:30', '01:00', '01:30', '02:00'];
 
 type Props = {
   title: string;
   isOpen: boolean;
+  ButtonText: string;
   doClose: () => void;
 };
 
-export const FormDialog: React.FC<Props> = ({ title, isOpen, doClose }) => {
+export const FormDialog: React.FC<Props> = ({
+  title,
+  isOpen,
+  ButtonText,
+  doClose,
+}) => {
   const [open, setOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [time, setTime] = useState<string>('30');
 
   useEffect(() => {
     setOpen(isOpen);
@@ -25,6 +42,14 @@ export const FormDialog: React.FC<Props> = ({ title, isOpen, doClose }) => {
   const handleClose = () => {
     setOpen(false);
     doClose();
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+  };
+
+  const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTime(event.target.value);
   };
 
   return (
@@ -36,17 +61,35 @@ export const FormDialog: React.FC<Props> = ({ title, isOpen, doClose }) => {
       >
         <DialogTitle id="form-dialog-title">{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
-          <TextField
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-          />
+          <Grid container direction="column">
+            <MuiPickersUtilsProvider utils={DateFnsUtils} locale={jaLocale}>
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-dialog"
+                label="Date picker dialog"
+                format="yyyy年MM月dd日"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
+            </MuiPickersUtilsProvider>
+            <TextField
+              id="standard-select-currency"
+              select
+              label="Select"
+              value={time}
+              onChange={handleTimeChange}
+              helperText="調整取得時間を選択してください"
+            >
+              {Times.map((time) => (
+                <MenuItem key={time} value={time}>
+                  {time}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -54,7 +97,7 @@ export const FormDialog: React.FC<Props> = ({ title, isOpen, doClose }) => {
           </Button>
           {/* TODO:処理を加える関数に変更する */}
           <Button onClick={handleClose} color="primary">
-            作成
+            {ButtonText}
           </Button>
         </DialogActions>
       </Dialog>

@@ -84,8 +84,9 @@ export const Home: React.FC = () => {
             <Typography>追加する</Typography>
           </Button>
           <FormDialog
-            title={'作成'}
+            title={'調整を作成する'}
             isOpen={open}
+            ButtonText="作成"
             doClose={() => handleClose()}
           />
         </Grid>
@@ -122,7 +123,12 @@ export const Home: React.FC = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <FormDialog title="編集" isOpen={Edit} doClose={() => EditClose()} />
+        <FormDialog
+          title="調整を編集する"
+          isOpen={Edit}
+          ButtonText="編集"
+          doClose={() => EditClose()}
+        />
       </Layout>
     </>
   );
