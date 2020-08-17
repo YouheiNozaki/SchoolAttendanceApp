@@ -21,6 +21,7 @@ import CreateIcon from '@material-ui/icons/Create';
 
 import { Layout } from '../components/layout';
 import { FormDialog } from '../components/molecules/FormDialog';
+import { DeleteDialog } from '../components/molecules/DeleteDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,6 +57,7 @@ export const Home: React.FC = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [Edit, setEdit] = useState(false);
+  const [Delete, setDelete] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -68,6 +70,12 @@ export const Home: React.FC = () => {
   };
   const EditClose = () => {
     setEdit(false);
+  };
+  const DeleteOpen = () => {
+    setDelete(true);
+  };
+  const DeleteClose = () => {
+    setDelete(false);
   };
 
   return (
@@ -111,7 +119,7 @@ export const Home: React.FC = () => {
                     {dayjs(row.day).add(16, 'week').format('YYYY年MM月DD日')}
                   </TableCell>
                   <TableCell>
-                    <Button>
+                    <Button onClick={DeleteOpen}>
                       <DeleteIcon />
                     </Button>
                     <Button onClick={EditOpen}>
@@ -128,6 +136,12 @@ export const Home: React.FC = () => {
           isOpen={Edit}
           ButtonText="編集"
           doClose={() => EditClose()}
+        />
+        <DeleteDialog
+          title="調整を使用する"
+          isOpen={Delete}
+          ButtonText="使用"
+          doClose={() => DeleteClose()}
         />
       </Layout>
     </>
