@@ -13,13 +13,12 @@ import {
   Paper,
   Grid,
   Button,
-  Typography,
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CreateIcon from '@material-ui/icons/Create';
 
 import { Layout } from '../components/layout';
+import { PlusButton } from '../components/atoms/PlusButton';
 import { FormDialog } from '../components/molecules/FormDialog';
 import { DeleteDialog } from '../components/molecules/DeleteDialog';
 
@@ -27,12 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     addButton: {
       padding: '24px',
-      '& button': {
-        color: theme.palette.secondary.main,
-        '& p': {
-          fontWeight: 'bold',
-        },
-      },
     },
     tableContainer: {
       paddding: '12px',
@@ -87,10 +80,7 @@ export const Home: React.FC = () => {
           justify="flex-end"
           className={classes.addButton}
         >
-          <Button onClick={handleOpen}>
-            <AddCircleIcon fontSize="large" />
-            <Typography>追加する</Typography>
-          </Button>
+          <PlusButton text="追加する" event={handleOpen} />
           <FormDialog
             title={'調整を作成する'}
             isOpen={open}

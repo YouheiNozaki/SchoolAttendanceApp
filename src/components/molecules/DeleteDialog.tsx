@@ -39,7 +39,7 @@ export const DeleteDialog: React.FC<Props> = ({
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">{title}</DialogTitle>
-        <DialogContent>使用してもよろしいですか？</DialogContent>
+        <DialogContent>※使用して画面から削除されます</DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             キャンセル
