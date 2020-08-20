@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { Home, Help, Settings } from '@material-ui/icons';
+import { Home, Help } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,11 +48,6 @@ export const Header: React.FC = () => {
         <Grid item>
           <Link to="/">
             <Home fontSize="large" />
-          </Link>
-        </Grid>
-        <Grid item>
-          <Link to="/setting">
-            <Settings fontSize="large" />
           </Link>
         </Grid>
         <Grid item>
